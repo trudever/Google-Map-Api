@@ -14,6 +14,14 @@ const getPlaces = async (start, end) => {
       return {
         status: elemResult.data.status,
         result: elemResult.data.result,
+        verified: one.email_1.status === 'RECEIVING',
+        links: {
+          facebook: one.facebook,
+          youtube: one.youtube,
+          twitter: one.twitter,
+          instagram: one.instagram,
+          goto: one.location_link,
+        },
       };
     })
   );

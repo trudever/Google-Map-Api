@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 
 const DropDown = (props: any) => {
   return (
-    <div className='text-right z-10'>
+    <div className={`${props.addClass ? props.addClass : ''} text-right z-10`}>
       <Menu as='div' className='relative inline-block text-left'>
         <div>
           <Menu.Button className='inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-black '>

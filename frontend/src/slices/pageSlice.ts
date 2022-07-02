@@ -65,7 +65,7 @@ export const pageSlice = createSlice({
         }
         state.index = state.index - 1;
         state.scope = {
-          start: state.scope.start - cardsToShow,
+          start: Math.max(state.scope.start - cardsToShow, 0),
           end: state.scope.end - cardsToShow,
         };
       }

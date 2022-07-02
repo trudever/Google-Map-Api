@@ -28,7 +28,7 @@ const ResultPanel = () => {
 
   return (
     <FlexBox addClass='w-full flex-col pb-32'>
-      <div className='w-full grid grid-cols-3 gap-8'>
+      <div className='w-full grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8'>
         {results.map((one, index) => (
           <Card key={'card' + index} index={index} />
         ))}

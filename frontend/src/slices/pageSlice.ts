@@ -43,6 +43,12 @@ export const pageSlice = createSlice({
     },
     moveIndex: (state, action: PayloadAction<string>) => {
       if (action.payload === 'NEXT') {
+        if (state.index === state.numberScope.end) {
+          state.numberScope = {
+            start: state.numberScope.start + 1,
+            end: state.numberScope.end + 1,
+          };
+        }
         state.index = state.index + 1;
         state.scope = {
           start: state.scope.start + cardsToShow,
@@ -51,6 +57,12 @@ export const pageSlice = createSlice({
         return;
       }
       if (state.index > 1) {
+        if (state.index === state.numberScope.start) {
+          state.numberScope = {
+            start: state.numberScope.start - 1,
+            end: state.numberScope.end - 1,
+          };
+        }
         state.index = state.index - 1;
         state.scope = {
           start: state.scope.start - cardsToShow,

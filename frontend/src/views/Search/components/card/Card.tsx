@@ -44,7 +44,9 @@ const Card = ({ index }: any) => {
         alt='Temp'
       />
       <div className='px-3'>
-        <h2 className='py-3 font-bold text-lg'>Higashi Honganji Temple</h2>
+        <h2 className='py-3 font-bold text-lg'>
+          {!data[index] ? 'Higashi Honganji Temple' : data[index].result.name}
+        </h2>
         <p className='text-xs py-2'>
           {!data[index]
             ? 'Higashi Honganji Temple'

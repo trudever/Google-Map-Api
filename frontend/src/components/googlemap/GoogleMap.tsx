@@ -11,7 +11,7 @@ const defaultProps = {
 
 const GoogleMap = () => {
   return (
-    <div className='relative w-full h-[300px] mt-[150px] lg:mt-[70px]'>
+    <div className='relative w-full h-[300px] mt-[120px] lg:mt-[70px]'>
       <GoogleMapReact
         bootstrapURLKeys={{
           key: 'AIzaSyDHC-oX_KAPJ__uxY28HsV6j_ZLeuAuFs0',

@@ -6,7 +6,7 @@ import DropDown from './components/dropdown';
 const Header = () => {
   return (
     <header className='w-full lg:border-b-[1px] lg:border-b-gray-200 fixed top-0 z-10 bg-[url("/assets/mobile-header-background.webp")] bg-cover first-letter: lg:bg-none lg:bg-white shadow-lg lg:shadow-none'>
-      <FlexBox addClass='relative w-full p-[40px_5%_70px_5%] lg:p-[12px_5%] justify-between items-center'>
+      <FlexBox addClass='w-full p-[40px_5%_70px_5%] lg:p-[12px_5%] justify-between items-center'>
         <FlexBox addClass='gap-[20px] lg:gap-0 items-center'>
           <img
             src='/assets/toggle.webp'
@@ -33,10 +33,6 @@ const Header = () => {
           <AddListButton />
         </FlexBox>
 
-        {/* For Mobile Version */}
-        <div className='lg:hidden absolute left-1/2 top-[110px] h-[110px] w-[90%] bg-white rounded-lg -translate-x-1/2 shadow-xl p-1'>
-          <div className='border-[1px] border-gray-400 border-opacity-60 w-full h-full rounded-md'></div>
-        </div>
       </FlexBox>
     </header>
   );

@@ -7,7 +7,7 @@ const SearchPage = () => {
   return (
     <div>
       <GoogleMap />
-      <Container addClass='flex flex-col md:flex-row w-full gap-[20px] mt-[20px]'>
+      <Container addClass='flex flex-col md:flex-row w-full gap-[20px] md:gap-[50px] lg:gap-[20px] mt-[20px] md:mt-[40px] lg:mt-[20px]'>
         <SelectPanel />
         <ResultPanel />
       </Container>

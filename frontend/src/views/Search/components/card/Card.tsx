@@ -64,7 +64,7 @@ const Card = ({ index }: any) => {
 
             <FlexBox addClass='py-1'>
               <CardIcon type='email' />
-              {data.result.international_phone_number}
+              {data.result.email}
             </FlexBox>
 
             <FlexBox addClass='justify-between py-1 px-4'>

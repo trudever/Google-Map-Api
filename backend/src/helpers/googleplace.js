@@ -13,7 +13,7 @@ const getPlaces = async (start, end) => {
       );
       return {
         status: elemResult.data.status,
-        result: elemResult.data.result,
+        result: {...elemResult.data.result, email: one.email_1},
         verified: one.email_1.status === 'RECEIVING',
         links: {
           facebook: one.facebook,

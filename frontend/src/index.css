@@ -16,3 +16,7 @@
     background: #ff000030;
   }
 }
+
+.card-email {
+  overflow-wrap: anywhere;
+}

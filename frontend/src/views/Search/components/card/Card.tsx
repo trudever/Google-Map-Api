@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../../app/store"
 import FlexBox from "../../../../components/containers/flexbox/FlexBox"
 import getAxios from "../../../../helpers/wrappedAxios"
+import { setLocation } from "../../../../slices/locationSlice"
 import CardIcon from "./CardIcon"
 
 const axios = getAxios()
@@ -13,13 +14,26 @@ const Card = ({ index }: any) => {
   const _data = useSelector((state: RootState) => state.pagedata.data)
   const data = _data[index]
 
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    setOpen(!open)
+
+    if (!open) {
+      dispatch(setLocation(data.result.geometry.location))
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
+  }
+
   return !data ? (
     <div className="h-[340px] shadow-md rounded-md">
       <div className="h-[180px] bg-gray-400 animate-pulse" />
     </div>
   ) : (
     <div
-      onClick={() => setOpen(!open)}
+      onClick={handleClick}
       className="cursor-pointer pb-4 border-[1px] shadow-md rounded-md overflow-hidden"
     >
       <img

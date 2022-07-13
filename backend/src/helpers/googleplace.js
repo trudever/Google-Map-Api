@@ -1,7 +1,7 @@
 const axios = require('axios');
 const getStorageData = require('./getStorageData');
 
-const secret = 'AIzaSyCg6O22nD-Tpam6DP4aZG-Y7a51xDGvMQg';
+const secret = 'AIzaSyDMknZo9IwmJxhValQrdZWfhR4pPy97IF0';
 
 const getPlaces = async (start, end) => {
   let data = getStorageData(start, end);

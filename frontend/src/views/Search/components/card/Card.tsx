@@ -13,7 +13,7 @@ const Card = ({ index }: any) => {
 
   const _data = useSelector((state: RootState) => state.pagedata.data)
   const data = _data[index]
-
+  
   const dispatch = useDispatch()
   const handleClick = () => {
     setOpen(!open)
@@ -42,7 +42,7 @@ const Card = ({ index }: any) => {
           data
             ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" +
               data.result.photos[0].photo_reference +
-              "&key=AIzaSyCg6O22nD-Tpam6DP4aZG-Y7a51xDGvMQg"
+              "&key=AIzaSyBHX0PQglCS_aCO5v2wgMf9ByGDaNSxHHI"
             : "/assets/welcome.png"
         }
         draggable={false}

@@ -19,7 +19,7 @@ const GoogleMap = () => {
     <div className="relative w-full h-[300px] mt-[75px] md:mt-[60px] lg:mt-[70px]">
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: "AIzaSyDHC-oX_KAPJ__uxY28HsV6j_ZLeuAuFs0",
+          key: "AIzaSyBHX0PQglCS_aCO5v2wgMf9ByGDaNSxHHI",
         }}
         center={location.location}
         zoom={8}

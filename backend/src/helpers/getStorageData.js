@@ -1,7 +1,7 @@
 const getAllData = () => {
   let data
   if (!data) {
-    data = require('../storage/mapinfo.json')
+    data = require('../storage/info.json')
     // data = JSON.parse(data)
   }
   return data

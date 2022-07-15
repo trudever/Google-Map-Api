@@ -40,7 +40,7 @@ const SelectPanel = () => {
         className='border-[1px] h-10 px-2 border-solid border-gray-400 rounded-md'
         onChange={(e) => setCountry(e.currentTarget.value)}
       >
-        <option value='USA'>United States</option>
+        <option value='United States'>United States</option>
       </select>
       <span>State</span>
       <select
@@ -49,7 +49,7 @@ const SelectPanel = () => {
       >
         <option value=''>All</option>
         {usState.map((item, index) => (
-          <option value={item.abbreviation} key={index}>
+          <option value={item.name} key={index}>
             {item.name}
           </option>
         ))}

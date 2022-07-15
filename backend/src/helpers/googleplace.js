@@ -41,16 +41,16 @@ const getPlaces = async (start, end, search) => {
     const test = JSON.stringify(item)
 
     if (
-      item.result.business_status
+      item.business_status
         .toUpperCase()
         .includes(status.toUpperCase()) &&
-      item.result.formatted_address
+      item.state
         .toUpperCase()
         .includes(state.toUpperCase()) &&
-      item.result.formatted_address
+      item.city
         .toUpperCase()
         .includes(city.toUpperCase()) &&
-      item.result.formatted_address
+      item.country
         .toUpperCase()
         .includes(country.toUpperCase()) &&
       test.toUpperCase().includes(keyword.toUpperCase())
@@ -63,10 +63,10 @@ const getPlaces = async (start, end, search) => {
 }
 
 const getPlaceImages = async (size, reference) => {
-  let results = await axios.get(
-    `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${size}&photo_reference=${reference}&key=${secret}`
-  )
-  return results.data
+  // let results = await axios.get(
+  //   `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${size}&photo_reference=${reference}&key=${secret}`
+  // )
+  // return results.data
 }
 
 const getNearPlaces = async (lat, lng) => {
@@ -74,13 +74,12 @@ const getNearPlaces = async (lat, lng) => {
   let response = []
   let distances = []
   datas.map(async (data, index) => {
-    if (data.result && data.result.geometry && data.result.geometry.location) {
-      let loc = data.result.geometry.location
+      let loc = {lat: data.latitude, lng: data.longitude}
       let distance = calcCrow(loc.lat, loc.lng, lat, lng)
       response.push(loc)
       distances.push(distance)
-    }
   })
+  // console.log(distances)
   let nearPlaces = []
   let min1 = 0
   min1 = Math.min(...distances)
@@ -104,6 +103,7 @@ const getNearPlaces = async (lat, lng) => {
       distances[index] = '300000'
     }
   })
+  // console.log(nearPlaces)
   return nearPlaces
 }
 

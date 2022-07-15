@@ -13,11 +13,12 @@ const Card = ({ index }: any) => {
 
   const _data = useSelector((state: RootState) => state.pagedata.data)
   const data = _data && _data[index]
+  console.log(data)
 
   const dispatch = useDispatch()
   const handleClick = () => {
     setOpen(!open)
-    dispatch(setLocation(data.result.geometry.location))
+    dispatch(setLocation({ lat: data.latitude, lng: data.longitude }))
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -26,30 +27,24 @@ const Card = ({ index }: any) => {
 
   return !data ? (
     <></>
+  ) : (
     // <div className='h-[340px] shadow-md rounded-md'>
     //   <div className='h-[180px] bg-gray-400 animate-pulse' />
     // </div>
-  ) : (
     <div
       onClick={handleClick}
       className='cursor-pointer pb-4 border-[1px] shadow-md rounded-md overflow-hidden'
     >
       <img
         className='w-full h-[180px]'
-        src={
-          data
-            ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' +
-              data.result.photos?.[0].photo_reference +
-              '&key=AIzaSyBHX0PQglCS_aCO5v2wgMf9ByGDaNSxHHI'
-            : '/assets/welcome.png'
-        }
+        src={data.photo}
         draggable={false}
         loading='lazy'
         alt='Temp'
       />
       <div className='px-3'>
         <FlexBox addClass='items-center gap-2 min-h-[10vw] lg:min-h-[5vw]'>
-          <h2 className='py-3 font-bold text-lg'>{data.result.name}</h2>
+          <h2 className='py-3 font-bold text-lg'>{data.name}</h2>
           {data.verified && (
             <img
               src='/assets/card/verify_badge.webp'
@@ -60,50 +55,52 @@ const Card = ({ index }: any) => {
         </FlexBox>
         <FlexBox addClass='text-xs py-1 items-center gap-1'>
           <CardIcon type='location' />
-          {data.result.formatted_address}
+          {data.full_address}
         </FlexBox>
         <FlexBox addClass='text-xs py-1 items-center gap-1'>
           <CardIcon type='globe' />
-          <a href={data.result.website}>{data.result.website}</a>
+          <a href={data.site}>{data.site}</a>
         </FlexBox>
         {/* Dropdowned */}
         {open && (
           <div>
             <FlexBox addClass='py-1'>
               <CardIcon type='phone' />
-              {data.result.international_phone_number}
+              {data.phone || "Sorry we didn't find the number"}
             </FlexBox>
 
             <FlexBox addClass='py-1 items-start'>
               <CardIcon type='email' />
-              <span className='card-email'>{data.result.email}</span>
+              <span className='card-email'>
+                {data.email_1 || data.email_2 || data.email_3 || 'Non Exist'}
+              </span>
             </FlexBox>
 
             <FlexBox addClass='justify-between py-1 px-4'>
               <FlexBox addClass='gap-3'>
-                {data.links.youtube ? (
-                  <a href={data.links.youtube} target='_blank'>
+                {data.youtube ? (
+                  <a href={data.youtube} target='_blank'>
                     <CardIcon type='socials/youtube' />
                   </a>
                 ) : (
                   <></>
                 )}
-                {data.links.twitter ? (
-                  <a href={data.links.twitter} target='_blank'>
+                {data.twitter ? (
+                  <a href={data.twitter} target='_blank'>
                     <CardIcon type='socials/twitter' />
                   </a>
                 ) : (
                   <></>
                 )}
-                {data.links.facebook ? (
-                  <a href={data.links.facebook} target='_blank'>
+                {data.facebook ? (
+                  <a href={data.facebook} target='_blank'>
                     <CardIcon type='socials/facebook' />
                   </a>
                 ) : (
                   <></>
                 )}
               </FlexBox>
-              <a href={data.links.goto} target='_blank'>
+              <a href={data.goto} target='_blank'>
                 <CardIcon type='goTo' />
               </a>
             </FlexBox>

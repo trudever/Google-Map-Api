@@ -4,21 +4,18 @@ import { RootState } from '../../app/store'
 import GoogleMapReact from 'google-map-react'
 import Marker from './Marker'
 import { useState, useEffect } from 'react'
+import getAxios from '../../helpers/wrappedAxios'
+
+const axios = getAxios()
 
 const GoogleMap = () => {
   const location = useSelector((state: RootState) => state.location)
   const [isShown, setIsShown] = useState<boolean>(false)
+  const [nearTemple, setNearTemple] = useState<any>()
   const [currentLocation, setCurrentLocation] = useState<any>({
     lat: 0,
     lng: 0,
   })
-  // const renderMarkers = (map: any, maps: any) => {
-  //   let marker = new maps.Marker({
-  //     position: location.location,
-  //     map,
-  //     title: 'Hello World!',
-  //   })
-  // }
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -31,8 +28,29 @@ const GoogleMap = () => {
     } else {
       console.log('Geolocation is not supported')
     }
-    console.log(currentLocation)
   }, [])
+
+  useEffect(() => {
+    const getNearTemple = async () => {
+      try {
+        const result = await axios(
+          '/getNearTemple/' + currentLocation.lat + '/' + currentLocation.lng
+        )
+        if (result.data) {
+          setNearTemple(result.data)
+        }
+        console.log(result)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    if (currentLocation.lat === 0 && currentLocation.lng === 0) return
+    getNearTemple()
+  }, [currentLocation])
+
+  const handleClick = () => {
+    setIsShown(!isShown)
+  }
 
   return (
     <div className='relative w-full h-[300px] mt-[75px] md:mt-[60px] lg:mt-[70px]'>
@@ -56,10 +74,33 @@ const GoogleMap = () => {
             name='My Location'
             color='blue'
           />
+          //   {nearTemple && nearTemple.map((temple: any, index: number) => (
+          //     <Marker
+          //       key={index}
+          //       lat={temple.lat}
+          //       lng={temple.lng}
+          //       name='Temple'
+          //       color='yellow'
+          //     />
+          //   ))}
         )}
+        {isShown &&
+          nearTemple.map((temple: any, index: number) => (
+            <Marker
+              key={index}
+              lat={temple.lat}
+              lng={temple.lng}
+              name='Temple'
+              color='yellow'
+            />
+          ))}
       </GoogleMapReact>
-      <div onClick={() => setIsShown(!isShown)}>
-        <UserCircleIcon className='cursor-pointer absolute bottom-[22px] right-16 w-10 h-10 hover:scale-110 transition-all duration-200' />
+      <div onClick={handleClick}>
+        <UserCircleIcon
+          className={`cursor-pointer absolute bottom-[22px] right-16 w-10 h-10 hover:scale-110 transition-all duration-200 ${
+            isShown && 'fill-yellow-400'
+          }`}
+        />
       </div>
     </div>
   )

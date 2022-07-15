@@ -3,8 +3,10 @@ const router = new Router();
 
 const { controller } = require('../controllers');
 
-router.get('/getplaces/:start/:end', controller.googleplace);
+router.post('/getplaces', controller.googleplace);
 
 router.get('/getplaceimages/:size/:reference', controller.googleplaceimage);
+
+router.get('/getNearTemple/:lat/:lng', controller.getNearTemple)
 
 module.exports = router;

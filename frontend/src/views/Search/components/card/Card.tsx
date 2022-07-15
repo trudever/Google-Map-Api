@@ -13,6 +13,7 @@ const Card = ({ index }: any) => {
 
   const _data = useSelector((state: RootState) => state.pagedata.data)
   const data = _data[index]
+  console.log(data)
 
   const dispatch = useDispatch()
   const handleClick = () => {
@@ -25,9 +26,10 @@ const Card = ({ index }: any) => {
   }
 
   return !data ? (
-    <div className='h-[340px] shadow-md rounded-md'>
-      <div className='h-[180px] bg-gray-400 animate-pulse' />
-    </div>
+    <></>
+    // <div className='h-[340px] shadow-md rounded-md'>
+    //   <div className='h-[180px] bg-gray-400 animate-pulse' />
+    // </div>
   ) : (
     <div
       onClick={handleClick}

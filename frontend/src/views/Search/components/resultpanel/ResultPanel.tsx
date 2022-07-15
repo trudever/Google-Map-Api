@@ -1,30 +1,35 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { RootState } from '../../../../app/store';
-import FlexBox from '../../../../components/containers/flexbox/FlexBox';
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { RootState } from '../../../../app/store'
+import FlexBox from '../../../../components/containers/flexbox/FlexBox'
 
-import getAxios from '../../../../helpers/wrappedAxios';
-import { setPageData } from '../../../../slices/pageSlice';
-import Card from '../card';
-import PaginationBar from '../pagination';
+import getAxios from '../../../../helpers/wrappedAxios'
+import { setPageData } from '../../../../slices/pageSlice'
+import Card from '../card'
+import PaginationBar from '../pagination'
 
-var axios = getAxios();
+var axios = getAxios()
 
 const ResultPanel = () => {
-  const dispatch = useDispatch();
-  const scope = useSelector((state: RootState) => state.pagedata.scope);
-
-  let results = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const dispatch = useDispatch()
+  const scope = useSelector((state: RootState) => state.pagedata.scope)
+  const search = useSelector((state: RootState) => state.search)
+  let results = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
   const getDataFromServer = async () => {
-    let result = await axios('/getplaces/' + scope.start + '/' + scope.end);
-    dispatch(setPageData(result.data));
-  };
+    console.log(search)
+    let result = await axios.post('/getplaces/', {
+      start: scope.start,
+      end: scope.end,
+      search: search,
+    })
+    dispatch(setPageData(result.data))
+  }
 
   useEffect(() => {
-    getDataFromServer();
-  });
+    getDataFromServer()
+  })
 
   return (
     <FlexBox addClass='w-full flex-col pb-32'>
@@ -35,7 +40,7 @@ const ResultPanel = () => {
       </div>
       <PaginationBar />
     </FlexBox>
-  );
-};
+  )
+}
 
-export default ResultPanel;
+export default ResultPanel

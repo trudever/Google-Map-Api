@@ -1,9 +1,15 @@
-const getStorageData = (start, end) => {
-  var data;
+const getAllData = () => {
+  let data
   if (!data) {
-    data = require('../storage/data.json');
+    data = require('../storage/mapinfo.json')
+    // data = JSON.parse(data)
   }
-  return data.slice(start, end);
-};
+  return data
+}
 
-module.exports = getStorageData;
+const getJSONData = () => {
+  let data = require('../storage/data.json')
+  return data
+}
+
+module.exports = { getAllData, getJSONData }

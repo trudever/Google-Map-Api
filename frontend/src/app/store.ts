@@ -1,10 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore } from '@reduxjs/toolkit'
 
-import locationSlice from "../slices/locationSlice"
-import pageSlice from "../slices/pageSlice"
+import locationSlice from '../slices/locationSlice'
+import pageSlice from '../slices/pageSlice'
+import searchSlice from '../slices/searchSlice'
 
 export const store = configureStore({
-  reducer: { pagedata: pageSlice, location: locationSlice },
+  reducer: {
+    pagedata: pageSlice,
+    location: locationSlice,
+    search: searchSlice,
+  },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

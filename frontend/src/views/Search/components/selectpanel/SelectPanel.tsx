@@ -16,7 +16,6 @@ const SelectPanel = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(setSearch({ status, keyword, country, state, city, category }))
-    console.log(status, keyword, country, state, city, category)
   }, [status, keyword, country, state, city, category])
 
   return (

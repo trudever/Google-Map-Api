@@ -39,7 +39,6 @@ const GoogleMap = () => {
         if (result.data) {
           setNearTemple(result.data)
         }
-        console.log(result)
       } catch (error) {
         console.log(error)
       }

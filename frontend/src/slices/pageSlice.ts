@@ -13,7 +13,7 @@ export interface Scope {
   end: number
 }
 
-export const cardsToShow = 9
+export const cardsToShow = 12
 export const numbersToShow = 4
 
 const initialState: PageState = {

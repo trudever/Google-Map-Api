@@ -28,16 +28,13 @@ const getPlaces = async (start, end, search) => {
   //     }
   //   })
   // )
-  // console.log(results)
   // fs.writeFile('/mapinfo.json', JSON.stringify(results), (err) => {
   //   if (err) {
   //     console.error(err)
   //   }
   // })
-  // // console.log(results)
   // // return results
   const { status, keyword, country, state, city, category } = search.search
-  console.log(status, keyword)
   let data = getAllData()
   let result = []
   data.map((item, index) => {
@@ -62,7 +59,6 @@ const getPlaces = async (start, end, search) => {
     }
   })
   result = result.slice(start, end)
-  console.log(result)
   return result
 }
 
@@ -108,7 +104,6 @@ const getNearPlaces = async (lat, lng) => {
       distances[index] = '300000'
     }
   })
-  console.log(nearPlaces)
   return nearPlaces
 }
 

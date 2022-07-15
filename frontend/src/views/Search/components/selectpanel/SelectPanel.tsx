@@ -20,15 +20,7 @@ const SelectPanel = () => {
 
   return (
     <div className='flex flex-col gap-[10px] w-full md:w-[40%] xl:w-[25%] p-4 border-[1px] border-gray-100 shadow-md rounded-md'>
-      <span>Status</span>
-      <select
-        className='border-[1px] h-10 px-2 border-solid border-gray-400 rounded-md'
-        onChange={(e) => setStatus(e.currentTarget.value)}
-      >
-        <option value='OPERATIONAL'>OPERATIONAL</option>
-        <option value='CLOSED_TEMPORARILY'>CLOSED_TEMPORARILY</option>
-      </select>
-      <span>Keywords</span>
+      <span>Temple Name</span>
       <input
         type='text'
         className='border-[1px] h-10 px-2 border-solid border-gray-400 rounded-md'
@@ -68,6 +60,14 @@ const SelectPanel = () => {
         disabled
       >
         <option value=''></option>
+      </select>
+      <span>Status</span>
+      <select
+        className='border-[1px] h-10 px-2 border-solid border-gray-400 rounded-md'
+        onChange={(e) => setStatus(e.currentTarget.value)}
+      >
+        <option value='OPERATIONAL'>OPERATIONAL</option>
+        <option value='CLOSED_TEMPORARILY'>CLOSED_TEMPORARILY</option>
       </select>
     </div>
   )

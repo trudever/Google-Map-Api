@@ -36,7 +36,7 @@ const Card = ({ index }: any) => {
       className='cursor-pointer pb-4 border-[1px] shadow-md rounded-md overflow-hidden'
     >
       <img
-        className='w-full h-[180px]'
+        className='w-full h-[180px] object-cover'
         src={data.photo}
         draggable={false}
         loading='lazy'

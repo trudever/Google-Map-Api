@@ -41,19 +41,11 @@ const getPlaces = async (start, end, search) => {
     const test = JSON.stringify(item)
 
     if (
-      item.business_status
-        .toUpperCase()
-        .includes(status.toUpperCase()) &&
-      item.state
-        .toUpperCase()
-        .includes(state.toUpperCase()) &&
-      item.city
-        .toUpperCase()
-        .includes(city.toUpperCase()) &&
-      item.country
-        .toUpperCase()
-        .includes(country.toUpperCase()) &&
-      test.toUpperCase().includes(keyword.toUpperCase())
+      item.business_status.toUpperCase().includes(status.toUpperCase()) &&
+      item.state.toUpperCase().includes(state.toUpperCase()) &&
+      item.city.toUpperCase().includes(city.toUpperCase()) &&
+      item.country.toUpperCase().includes(country.toUpperCase()) &&
+      item.name.toUpperCase().includes(keyword.toUpperCase())
     ) {
       result.push(item)
     }
@@ -74,10 +66,10 @@ const getNearPlaces = async (lat, lng) => {
   let response = []
   let distances = []
   datas.map(async (data, index) => {
-      let loc = {lat: data.latitude, lng: data.longitude}
-      let distance = calcCrow(loc.lat, loc.lng, lat, lng)
-      response.push(loc)
-      distances.push(distance)
+    let loc = { lat: data.latitude, lng: data.longitude }
+    let distance = calcCrow(loc.lat, loc.lng, lat, lng)
+    response.push(loc)
+    distances.push(distance)
   })
   // console.log(distances)
   let nearPlaces = []

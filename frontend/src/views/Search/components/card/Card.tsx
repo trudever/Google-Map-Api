@@ -55,11 +55,11 @@ const Card = ({ index }: any) => {
         </FlexBox>
         <FlexBox addClass='text-xs py-1 items-center gap-1'>
           <CardIcon type='location' />
-          {data.full_address}
+          <a href={data.location_link} target='_blank' className='overflow-hidden whitespace-nowrap overflow-ellipsis'>{data.full_address}</a>
         </FlexBox>
         <FlexBox addClass='text-xs py-1 items-center gap-1'>
           <CardIcon type='globe' />
-          <a href={data.site}>{data.site}</a>
+          <a href={data.site} target='_blank' className='overflow-hidden whitespace-nowrap overflow-ellipsis'>{data.site}</a>
         </FlexBox>
         {/* Dropdowned */}
         {open && (

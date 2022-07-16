@@ -14,7 +14,7 @@ const Header = () => {
             className='hidden cursor-pointer lg:hidden hover:shadow-md transition-all duration-150 w-[30px] h-[24px]'
           />
           <span className='text-[18px] md:text-[26px] lg:text-[36px] font-bold text-blue-600'>
-            Buddhist to IBAA Buddhist Directory
+            IBAA Buddhist Directory
           </span>
         </FlexBox>
 

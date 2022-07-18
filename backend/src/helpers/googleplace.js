@@ -36,7 +36,8 @@ const getPlaces = async (start, end, search, current) => {
   // // return results
   const { status, keyword, country, state, city, category } = search.search
   const { countryName, lat, lng } = current.current
-  if (countryName !== 'United States')
+  console.log(countryName)
+  if (!countryName.includes('United States'))
     return []
   let data = getAllData()
   let result = []

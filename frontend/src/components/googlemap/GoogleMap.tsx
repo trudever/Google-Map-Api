@@ -31,17 +31,6 @@ const GoogleMap = () => {
     } else {
       console.log('Geolocation is not supported')
     }
-    const getCountryName = async () => {
-      const repsonse = await axios.get('http://ip-api.com/json')
-      setCountryName(repsonse.data.country)
-    }
-    getCountryName()
-    console.log(countryName)
-    setCurrent({
-      countryName: countryName,
-      lat: 0,
-      lng: 0,
-    })
   }, [])
   const dispatch = useDispatch()
   useEffect(() => {
@@ -59,10 +48,36 @@ const GoogleMap = () => {
     }
     if (currentLocation.lat === 0 && currentLocation.lng === 0) return
     getNearTemple()
+    const getCountryName = async () => {
+      console.log(currentLocation)
+      const repsonse = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyBHX0PQglCS_aCO5v2wgMf9ByGDaNSxHHI`
+      )
+      const ccc = repsonse.data.results[0].formatted_address
+      const aaa = ccc.split(', ')
+      setCountryName(aaa[aaa.length - 2])
+    }
+    getCountryName()
+    console.log(countryName)
+    setCurrent({
+      countryName: countryName,
+      lat: 0,
+      lng: 0,
+    })
   }, [currentLocation])
 
+  useEffect(() => {
+    dispatch(
+      setCurrent({
+        countryName: countryName,
+        lat: 0,
+        lng: 0,
+      })
+    )
+  }, [countryName])
+
   const handleClick = () => {
-    if (countryName === 'United States') setIsShown(!isShown)
+    if (countryName.includes('United States')) setIsShown(!isShown)
     if (!isShown) {
       dispatch(
         setCurrent({

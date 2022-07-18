@@ -55,11 +55,9 @@ const GoogleMap = () => {
       )
       const ccc = repsonse.data.results[0].formatted_address
       const aaa = ccc.split(', ')
-      console.log(aaa)
-      setCountryName(aaa[aaa.length - 2])
+      setCountryName(aaa[aaa.length - 1])
     }
     getCountryName()
-    console.log(countryName)
     setCurrent({
       countryName: countryName,
       lat: 0,

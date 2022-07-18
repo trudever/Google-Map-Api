@@ -55,6 +55,7 @@ const GoogleMap = () => {
       )
       const ccc = repsonse.data.results[0].formatted_address
       const aaa = ccc.split(', ')
+      console.log(aaa)
       setCountryName(aaa[aaa.length - 2])
     }
     getCountryName()

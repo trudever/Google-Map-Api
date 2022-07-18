@@ -67,6 +67,7 @@ const GoogleMap = () => {
   }, [currentLocation])
 
   useEffect(() => {
+    console.log(countryName)
     dispatch(
       setCurrent({
         countryName: countryName,

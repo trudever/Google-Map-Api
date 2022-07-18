@@ -17,6 +17,7 @@ const ResultPanel = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const scope = useSelector((state: RootState) => state.pagedata.scope)
   const search = useSelector((state: RootState) => state.search)
+  const current = useSelector((state: RootState) => state.current)
   let results = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
   const getDataFromServer = async () => {
@@ -25,6 +26,7 @@ const ResultPanel = () => {
         start: scope.start,
         end: scope.end,
         search: search,
+        current: current,
       })
       dispatch(setPageData(result.data))
     } catch (error) {}

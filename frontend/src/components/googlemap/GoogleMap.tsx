@@ -5,18 +5,21 @@ import GoogleMapReact from 'google-map-react'
 import Marker from './Marker'
 import { useState, useEffect } from 'react'
 import getAxios from '../../helpers/wrappedAxios'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setCurrent } from '../../slices/currentSlice'
 
-const axios = getAxios()
+const axiosA = getAxios()
 
 const GoogleMap = () => {
   const location = useSelector((state: RootState) => state.location)
   const [isShown, setIsShown] = useState<boolean>(false)
   const [nearTemple, setNearTemple] = useState<any>()
+  const [countryName, setCountryName] = useState<string>('')
   const [currentLocation, setCurrentLocation] = useState<any>({
     lat: 0,
     lng: 0,
   })
-
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -28,12 +31,17 @@ const GoogleMap = () => {
     } else {
       console.log('Geolocation is not supported')
     }
+    const getCountryName = async () => {
+      const repsonse = await axios.get('http://ip-api.com/json')
+      setCountryName(repsonse.data.country)
+    }
+    getCountryName()
   }, [])
-
+  const dispatch = useDispatch()
   useEffect(() => {
     const getNearTemple = async () => {
       try {
-        const result = await axios(
+        const result = await axiosA(
           '/getNearTemple/' + currentLocation.lat + '/' + currentLocation.lng
         )
         if (result.data) {
@@ -48,7 +56,24 @@ const GoogleMap = () => {
   }, [currentLocation])
 
   const handleClick = () => {
-    setIsShown(!isShown)
+    if (countryName === 'United States') setIsShown(!isShown)
+    if (!isShown) {
+      dispatch(
+        setCurrent({
+          countryName: countryName,
+          lat: currentLocation.lat,
+          lng: currentLocation.lng,
+        })
+      )
+    } else {
+      dispatch(
+        setCurrent({
+          countryName: countryName,
+          lat: 0,
+          lng: 0,
+        })
+      )
+    }
   }
 
   return (
@@ -65,6 +90,7 @@ const GoogleMap = () => {
           lng={location.location.lng}
           name='My Marker'
           color='red'
+          zIndex='100'
         />
         {isShown && (
           <Marker
@@ -72,6 +98,7 @@ const GoogleMap = () => {
             lng={currentLocation.lng}
             name='My Location'
             color='blue'
+            zIndex='200'
           />
           //   {nearTemple && nearTemple.map((temple: any, index: number) => (
           //     <Marker
@@ -91,6 +118,7 @@ const GoogleMap = () => {
               lng={temple.lng}
               name='Temple'
               color='yellow'
+              zIndex={10}
             />
           ))}
       </GoogleMapReact>

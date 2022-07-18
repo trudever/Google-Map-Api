@@ -1,8 +1,8 @@
 const place = require('../helpers/googleplace')
 
 exports.googleplace = async (req, res) => {
-  let { start, end, search } = req.body
-  let results = await place.getPlaces(start, end, search)
+  let { start, end, search, current } = req.body
+  let results = await place.getPlaces(start, end, search, current)
   res.send(results)
 }
 

@@ -4,7 +4,7 @@ const { getAllData, getJSONData } = require('./getStorageData')
 
 const secret = 'AIzaSyDMknZo9IwmJxhValQrdZWfhR4pPy97IF0'
 
-const getPlaces = async (start, end, search) => {
+const getPlaces = async (start, end, search, current) => {
   // // let data = getStorageData(start, end)
   // let data = getJSONData()
   // let results = await Promise.all(
@@ -35,6 +35,9 @@ const getPlaces = async (start, end, search) => {
   // })
   // // return results
   const { status, keyword, country, state, city, category } = search.search
+  const { countryName, lat, lng } = current.current
+  if (countryName !== 'United States')
+    return []
   let data = getAllData()
   let result = []
   data.map((item, index) => {
@@ -50,6 +53,21 @@ const getPlaces = async (start, end, search) => {
       result.push(item)
     }
   })
+
+  const result1 = []
+  if ((lat !== 0) & (lng !== 0)) {
+    const nearPlaces = await getNearPlaces(lat, lng)
+    console.log(nearPlaces)
+    result.map((item, index) => {
+      nearPlaces.map((place, i) => {
+        if (item.latitude === place.lat && item.longitude === place.lng)
+          result1.push(item)
+      })
+    })
+    console.log(result1)
+    result = result1
+  }
+
   result = result.slice(start, end)
   return result
 }

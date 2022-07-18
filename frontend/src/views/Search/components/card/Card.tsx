@@ -13,7 +13,6 @@ const Card = ({ index }: any) => {
 
   const _data = useSelector((state: RootState) => state.pagedata.data)
   const data = _data && _data[index]
-  console.log(data)
 
   const dispatch = useDispatch()
   const handleClick = () => {

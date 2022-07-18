@@ -36,6 +36,12 @@ const GoogleMap = () => {
       setCountryName(repsonse.data.country)
     }
     getCountryName()
+    console.log(countryName)
+    setCurrent({
+      countryName: countryName,
+      lat: 0,
+      lng: 0,
+    })
   }, [])
   const dispatch = useDispatch()
   useEffect(() => {

@@ -37,8 +37,8 @@ const getPlaces = async (start, end, search, current) => {
   const { status, keyword, country, state, city, category } = search.search
   const { countryName, lat, lng } = current.current
   console.log(countryName)
-  if (!countryName.includes('United States') && !countryName.includes('US'))
-    return []
+  // if (!countryName.includes('United States') && !countryName.includes('US'))
+  //   return []
   let data = getAllData()
   let result = []
   data.map((item, index) => {
@@ -57,6 +57,9 @@ const getPlaces = async (start, end, search, current) => {
 
   const result1 = []
   if ((lat !== 0) & (lng !== 0)) {
+    if (!countryName.includes('United States') && !countryName.includes('US')) {
+      return []
+    }
     const nearPlaces = await getNearPlaces(lat, lng)
     console.log(nearPlaces)
     result.map((item, index) => {

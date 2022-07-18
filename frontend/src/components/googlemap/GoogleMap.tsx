@@ -77,7 +77,8 @@ const GoogleMap = () => {
   }, [countryName])
 
   const handleClick = () => {
-    if (countryName.includes('United States') || countryName.includes('US')) setIsShown(!isShown)
+    // if (countryName.includes('United States') || countryName.includes('US')) setIsShown(!isShown)
+    setIsShown(!isShown)
     if (!isShown) {
       dispatch(
         setCurrent({
@@ -132,6 +133,8 @@ const GoogleMap = () => {
           //   ))}
         )}
         {isShown &&
+          (countryName.includes('United States') ||
+            countryName.includes('US')) &&
           nearTemple.map((temple: any, index: number) => (
             <Marker
               key={index}

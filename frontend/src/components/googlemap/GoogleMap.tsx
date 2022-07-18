@@ -56,7 +56,7 @@ const GoogleMap = () => {
   }, [currentLocation])
 
   const handleClick = () => {
-    if (!countryName.includes('United States') && !countryName.includes('US')) setIsShown(!isShown)
+    if (countryName === 'United States') setIsShown(!isShown)
     if (!isShown) {
       dispatch(
         setCurrent({

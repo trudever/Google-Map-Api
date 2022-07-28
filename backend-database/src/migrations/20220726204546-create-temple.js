@@ -21,7 +21,7 @@ module.exports = {
 				type: Sequelize.STRING,
 			},
 			location_link: {
-				type: Sequelize.STRING,
+				type: Sequelize.STRING(1024),
 			},
 			full_address: {
 				type: Sequelize.STRING,

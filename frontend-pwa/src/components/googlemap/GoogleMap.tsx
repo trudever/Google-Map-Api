@@ -38,7 +38,7 @@ const GoogleMap = () => {
 		const getNearTemple = async () => {
 			try {
 				const result = await axiosA(
-					'/getNearTemple/' + currentLocation.lat + '/' + currentLocation.lng
+					'/temple/getNearTemple/' + currentLocation.lat + '/' + currentLocation.lng
 				)
 				if (result.data) {
 					setNearTemple(result.data)

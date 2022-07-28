@@ -1,0 +1,13 @@
+table,
+th,
+td {
+	border: solid 1px;
+	text-align: center;
+  font-size: 12px;
+}
+
+td {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

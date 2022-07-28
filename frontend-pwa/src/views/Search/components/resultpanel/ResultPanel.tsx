@@ -20,7 +20,7 @@ const ResultPanel = () => {
 
 	const getDataFromServer = async () => {
 		try {
-			let result = await axios.post('/getplaces/', {
+			let result = await axios.post('/temple/readTemple/', {
 				start: scope.start,
 				end: scope.end,
 				search: search,

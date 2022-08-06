@@ -1,14 +1,63 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Papa from 'papaparse';
 import getAxios from 'helpers/wrappedAxios';
+import styled from 'styled-components';
+import uploadIcon from './upload.svg';
 const axios = getAxios();
 
 interface Props {
   name: string;
 }
+interface StyledProps {
+  percentage: number;
+}
+const WidgetWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  position: relative;
+
+  img {
+    width: 50px;
+  }
+
+  input {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .right {
+    margin-left: 50px;
+    height: 100%;
+  }
+`;
+const ProgressBar = styled.div<StyledProps>`
+  width: 500px;
+  height: 10px;
+  border-radius: 10px;
+  background: #e8eef4;
+  margin-top: 20px;
+  position: relative;
+
+  div {
+    width: ${({ percentage }) => `${percentage}%`};
+    transition: width 1s;
+    height: 100%;
+    background: #f17d7d;
+  }
+`;
+const Count = styled.p`
+  font-size: 20px;
+  margin-left: 50px;
+`;
 const UploadCSV: React.FC<Props> = ({ name }) => {
-  const [file, setFile] = useState<any>('');
   const inputFile = useRef<any>(null);
+  const [percentage, setPercentage] = useState<number>(0);
 
   const handleCreateTemple = async (
     params: ReadonlyArray<string>,
@@ -38,6 +87,13 @@ const UploadCSV: React.FC<Props> = ({ name }) => {
     } catch (error) {}
   };
 
+  const onButtonClick = () => {
+    if (name === '') {
+      alert('Select Country!');
+      return;
+    }
+    inputFile.current.click();
+  };
   const handleFileUpload = (e: any) => {
     const { files } = e.target;
     if (files && files.length) {
@@ -47,39 +103,48 @@ const UploadCSV: React.FC<Props> = ({ name }) => {
       const fileType = parts[parts.length - 1];
       console.log('fileType', fileType); //ex: zip, rar, jpg, svg etc.
 
-      setFile(files[0]);
       Papa.parse(files[0], {
-        complete: function (results: any) {
+        complete: async function (results: any) {
           for (let i = 1; i < results.data.length; i++) {
             if (results.data[i][1] !== '') {
               console.log(results.data[i]);
-              handleCreateTemple(results.data[i], name);
+              setPercentage(Math.ceil((i * 100) / (results.data.length - 1)));
+              await handleCreateTemple(results.data[i], name);
             }
           }
+          alert('Finished');
+          setPercentage(0);
         },
       });
     }
   };
 
-  const onButtonClick = () => {
-    inputFile.current.click();
-  };
-
   return (
-    <div>
-      <input
-        style={{ display: 'none' }}
-        ref={inputFile}
-        onChange={handleFileUpload}
-        type='file'
-      />
+    <WidgetWrapper>
+      {/*
       <div
         className='p-2 bg-blue-600 ml-2 rounded-md text-white active:scale-90'
         onClick={onButtonClick}
-      >
+      ></div>
         UploadCSV
+      </div> */}
+
+      <div className='left'>
+        <img src={uploadIcon} width='50px' alt='file' onClick={onButtonClick} />
       </div>
-    </div>
+      <div className='right'>
+        <ProgressBar percentage={percentage} className='progress_bar'>
+          <div />
+        </ProgressBar>
+      </div>
+      <Count>{percentage}%</Count>
+      <input
+        style={{ display: 'none' }}
+        ref={inputFile}
+        type='file'
+        onChange={handleFileUpload}
+      />
+    </WidgetWrapper>
   );
 };
 

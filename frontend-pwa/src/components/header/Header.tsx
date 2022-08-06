@@ -2,7 +2,7 @@ import { GlobeAltIcon, UserIcon } from '@heroicons/react/solid';
 import FlexBox from '../containers/flexbox/FlexBox';
 import AddListButton from './components/addlistingbutton';
 import DropDown from './components/dropdown';
-
+import UploadCSV from './components/UploadCSV';
 const Header = () => {
   return (
     <header className='w-full lg:border-b-[1px] lg:border-b-gray-200 fixed top-0 z-10 bg-cover first-letter: lg:bg-none lg:bg-white shadow-lg lg:shadow-none bg-white'>
@@ -32,7 +32,6 @@ const Header = () => {
           />
           <AddListButton />
         </FlexBox>
-
       </FlexBox>
     </header>
   );

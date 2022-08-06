@@ -30,6 +30,7 @@ const CountrySelector: React.FC<IfirstChildProps> = ({ name, updateName }) => {
     </div>
   );
 };
+
 const ImportTemples = () => {
   const [countryName, setCountryName] = useState<string>('');
   const updateName = (name: any): void => {
@@ -39,8 +40,8 @@ const ImportTemples = () => {
 
   return (
     <Container addClass='flex flex-col md:flex-row w-full gap-[20px] md:px-[4%] md:gap-[50px] lg:gap-[20px] mt-[20px] md:mt-[100px] lg:mt-[100px]'>
-      <UploadCSV name={countryName} />
       <CountrySelector name={countryName} updateName={updateName} />
+      <UploadCSV name={countryName} />
     </Container>
   );
 };
